@@ -13,6 +13,7 @@ public class CreateLeaveTypeCommandValidator : AbstractValidator<CreateLeaveType
         RuleFor(p => p.Name)
             .NotEmpty()
             .WithMessage("{PropertyName} is required")
+            .NotNull()
             .MaximumLength(70)
             .WithMessage("{PropertyName} must be fewer than 70 characters");
 
