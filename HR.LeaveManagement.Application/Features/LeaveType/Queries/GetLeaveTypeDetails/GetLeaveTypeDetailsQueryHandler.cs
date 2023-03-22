@@ -19,7 +19,9 @@ public class GetLeaveTypeDetailsQueryHandler
 
     public async Task<LeaveTypeDetailsDto> Handle(GetLeaveTypeDetailsQuery request, CancellationToken cancellationToken)
     {
-        var leaveTypes = await _leaveTypeRepository.GetByIdAsync(request.Id) ??
+        var leaveTypes = await _leaveTypeRepository.GetByIdAsync(request.Id);
+
+        if (leaveTypes == null)
             throw new NotFoundException(nameof(Domain.LeaveType), request.Id);
 
         var data = _mapper.Map<LeaveTypeDetailsDto>(leaveTypes);
